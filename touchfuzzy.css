@@ -48,7 +48,7 @@ h6,
 a,
 strong,
 em {
-  --animation-duration: 10s;
+  --animation-duration: 5s;
   animation-name: blur, skew;
 }
 
