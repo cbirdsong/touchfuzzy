@@ -6,6 +6,18 @@
     <title>Touch Fuzzy</title>
 
     <style id="page-css">
+      .sr-only {
+        position: absolute;
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        padding: 0;
+        border: 0;
+        white-space: nowrap;
+      }
+
       *,
       *::before,
       *::after {
@@ -40,28 +52,16 @@
         flex-flow: column;
         align-items: center;
         justify-content: center;
+        justify-content: space-evenly;
       }
       footer {
         font-size: 0.75em;
       }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-weight: 500;
+      details {
+        font-size: 0.8em;
       }
-
-      p,
-      ol,
-      ul {
-        margin-bottom: 1.25em;
-      }
-      li {
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
+      summary {
+        font-style: italic;
       }
 
       a {
@@ -76,12 +76,16 @@
         transition-duration: 250ms;
         transition-timing-function: ease-in-out;
       }
+      a:not([class]) {
+        text-decoration-skip-ink: auto;
+      }
       a:hover {
         filter: saturate(150%);
       }
       a:focus {
         box-shadow: 0 0 0 3px royalblue;
       }
+
       a.button {
         display: inline-block;
         padding: 0.25em 0.75em;
@@ -92,6 +96,33 @@
         border-radius: 4px;
 
         text-decoration: none;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 500;
+        text-align: center;
+      }
+
+      p,
+      ol,
+      ul {
+        margin-bottom: 1.25em;
+      }
+      li {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+      }
+
+      input,
+      button,
+      textarea,
+      select {
+        font: inherit;
       }
     </style>
     <style id="bookmarklet-css">
@@ -213,30 +244,36 @@
   </head>
   <body>
     <main>
-      <h1>touchfuzzy</h1>
-      <ol>
-        <li>
-          Drag this to your bookmarks bar:
-          <a id="bookmarklet-link" class="button" href="#">🌀</a>
-        </li>
-        <li>
-          Go to a website with a bunch of stuff on it.
-        </li>
-        <li>
-          Click the 🌀.
-        </li>
-        <li>
-          Wait.
-        </li>
-      </ol>
+      <article>
+        <h1>touchfuzzy</h1>
+        <ol>
+          <li>
+            Drag this to your bookmarks bar:
+            <a id="bookmarklet-link" class="button" href="#">🌀</a>
+          </li>
+          <li>
+            Go to a website with a bunch of stuff on it.
+          </li>
+          <li>
+            Click the 🌀.
+          </li>
+          <li>
+            Wait.
+          </li>
+        </ol>
+      </article>
 
-      <details hidden aria-hidden="true">
-        <summary>But... I can't. I'm on a phone.</summary>
-        Try
-        <a
-          href="https://www.cultofmac.com/500532/how-to-add-bookmarklet-mobile-iphone-safari/"
-          >this</a
-        >.
+      <details>
+        <summary>Bookmarks bar? I'm on a phone.</summary>
+        <p>
+          Try
+          <a
+            href="https://www.cultofmac.com/500532/how-to-add-bookmarklet-mobile-iphone-safari/"
+            target="_blank"
+            >this</a
+          >, using this code:
+        </p>
+        <label class="sr-only" for="bookmarklet-text">Bookmarklet Source</label>
         <textarea
           readonly
           name="bookmarklet-text"
