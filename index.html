@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Touch Fuzzy</title>
 
-		<link rel="stylesheet" type="text/css" href="touchfuzzy.css" />
-    <style>
+    <style id="page-css">
       *,
       *::before,
       *::after {
@@ -14,7 +13,7 @@
       }
 
       html {
-        min-height: 90vh;
+        min-height: 100vh;
 
         font-size: calc(1rem + 1vw);
         line-height: 1.5;
@@ -28,25 +27,50 @@
         align-items: center;
         justify-content: center;
 
-        min-height: 90vh;
+        min-height: 100vh;
         margin: 0;
         padding: calc(1rem + 1vw);
+
+        background-color: #fdf4e8;
       }
-      
-      p, ol, ul {
-      	margin-bottom: 1.25em;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 500;
+      }
+
+      p,
+      ol,
+      ul {
+        margin-bottom: 1.25em;
+      }
       li {
-      }
-	      margin-top: 0.5em;
-	      margin-bottom: 0.5em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
       }
 
       a {
         color: mediumblue;
+
+        transition-property: color, opacity, background-color, transform, filter,
+          box-shadow;
+        transition-duration: 250ms;
+        transition-timing-function: ease-in-out;
+      }
+      a:hover {
+        filter: saturate(150%);
+      }
+      a:focus {
+        box-shadow: 0 0 0 3px royalblue;
       }
       a.button {
         display: inline-block;
         padding: 0.25em 0.75em;
+        line-height: 1.2;
 
         color: black;
         background-color: lightskyblue;
@@ -55,194 +79,184 @@
         text-decoration: none;
       }
     </style>
+    <style id="bookmarklet-css">
+      :root {
+        --animation-delay: 10s;
+        --animation-duration: 30s;
+        --animation-warp: 8s;
+        --degree-warp: 0deg;
+      }
+      * {
+        animation-duration: var(--animation-duration),
+          calc(var(--animation-duration) + var(--animation-warp)),
+          calc(var(--animation-duration) + var(--animation-warp) * 2);
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-delay: var(--animation-delay);
+      }
+
+      body {
+        animation-name: skew;
+        animation-delay: 60s;
+      }
+
+      figure,
+      img,
+      picture,
+      video,
+      iframe,
+      svg,
+      canvas,
+      input,
+      textarea,
+      button,
+      pre,
+      hr {
+        animation-name: hueRotate, scale3D, origin;
+      }
+      p,
+      li,
+      dd,
+      dt,
+      dl,
+      figcaption,
+      blockquote,
+      cite,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      a,
+      strong,
+      em {
+        --animation-duration: 5s;
+        animation-name: blur, skew;
+      }
+
+      @keyframes hueRotate {
+        from {
+          filter: hue-rotate(0deg) saturate(100%);
+        }
+        to {
+          filter: hue-rotate(180deg) saturate(120%);
+        }
+      }
+      @keyframes scale3D {
+        from {
+          transform: scale3D(0.95, 0.95, 1) skew(-1deg, -1deg);
+        }
+        to {
+          transform: scale3D(1.25, 1.25, 1) skew(1deg, 1deg);
+        }
+      }
+      @keyframes skew {
+        0% {
+          transform: skew(0deg, 0deg);
+        }
+        33% {
+          transform: skew(0.5deg, 0.5deg);
+        }
+        66% {
+          transform: skew(-0.5deg, -0.5deg);
+        }
+        100% {
+          transform: skew(0deg, 0deg);
+        }
+      }
+      @keyframes origin {
+        0% {
+          transform-origin: 50% 50%;
+        }
+        20% {
+          transform-origin: 40% 50%;
+        }
+        40% {
+          transform-origin: 60% 40%;
+        }
+        60% {
+          transform-origin: 40% 60%;
+        }
+        80% {
+          transform-origin: 50% 40%;
+        }
+        100% {
+          transform-origin: 50% 50%;
+        }
+      }
+
+      @keyframes blur {
+        from {
+          filter: blur(0em) contrast(100%);
+        }
+        to {
+          filter: blur(0.1em) contrast(200%);
+        }
+      }
+    </style>
   </head>
   <body>
-				<h1>touchfuzzy</h1>
-				<ol>
-			    <li>
-			    Drag this to your bookmarks bar:
-			    <a id="bookmarklet" class="button" href="#">🌀</a>
-			    </li>
-			    <li>
-				    Go to a website with a bunch of stuff on it.
-			    </li>
-			    <li>
-			    	Click the 🌀.
-		    	</li>
-			    <li>
-						Wait.
-		    	</li>
-	    	</ol>
+    <h1>touchfuzzy</h1>
+    <ol>
+      <li>
+        Drag this to your bookmarks bar:
+        <a id="bookmarklet-link" class="button" href="#">🌀</a>
+      </li>
+      <li>
+        Go to a website with a bunch of stuff on it.
+      </li>
+      <li>
+        Click the 🌀.
+      </li>
+      <li>
+        Wait.
+      </li>
+    </ol>
 
-    <textarea hidden readonly aria-hidden="true" name="csscode" id="csscode">
-			:root {
-  --animation-delay: 10s;
-  --animation-duration: 30s;
-  --animation-warp: 8s;
-}
-* {
-  animation-duration: var(--animation-duration),
-    calc(var(--animation-duration) + var(--animation-warp)),
-    calc(var(--animation-duration) + var(--animation-warp) * 2);
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-delay: var(--animation-delay);
-}
-
-body {
-  animation-name: skew;
-  animation-delay: 60s;
-}
-
-figure,
-img,
-picture,
-video,
-iframe,
-svg,
-canvas,
-input,
-textarea,
-button,
-pre,
-hr {
-  animation-name: hueRotate, scale3D, origin;
-}
-p,
-li,
-dd,
-dt,
-dl,
-figcaption,
-blockquote,
-cite,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a,
-strong,
-em {
-  --animation-duration: 10s;
-  animation-name: blur, skew;
-}
-
-@keyframes hueRotate {
-  from {
-    filter: hue-rotate(0deg) saturate(100%);
-  }
-  to {
-    filter: hue-rotate(180deg) saturate(120%);
-  }
-}
-@keyframes scale3D {
-  from {
-    transform: scale3D(0.95, 0.95, 1) skew(-1deg, -1deg);
-  }
-  to {
-    transform: scale3D(1.25, 1.25, 1) skew(1deg, 1deg);
-  }
-}
-@keyframes skew {
-  0% {
-    transform: skew(0deg, 0deg);
-  }
-  33% {
-    transform: skew(0.5deg, 0.5deg);
-  }
-  66% {
-    transform: skew(-0.5deg, -0.5deg);
-  }
-  100% {
-    transform: skew(0deg, 0deg);
-  }
-}
-@keyframes origin {
-  0% {
-    transform-origin: 50% 50%;
-  }
-  20% {
-    transform-origin: 40% 50%;
-  }
-  40% {
-    transform-origin: 60% 40%;
-  }
-  60% {
-    transform-origin: 40% 60%;
-  }
-  80% {
-    transform-origin: 50% 40%;
-  }
-  100% {
-    transform-origin: 50% 50%;
-  }
-}
-
-@keyframes blur {
-  from {
-    filter: blur(0em) contrast(100%);
-  }
-  to {
-    filter: blur(0.1em) contrast(200%);
-  }
-}
-
-		</textarea
-    >
-
-    <textarea hidden readonly aria-hidden="true" name="jscode" id="jscode">
-					
-					function getDizzy() {
-						var things = document.querySelectorAll("*");
-						for (var thing of things) {
-							var time = 5 + Math.floor(Math.random() * Math.floor(30));
-							thing.style.setProperty("--animation-delay", time * 1.5 + "s");
-							thing.style.setProperty("--animation-warp", time * 2.5 + "s");
-							thing.style.setProperty("--degree-warp", time * 0.1 + "deg");
-						}
-					}
-					
-					
-					touchFuzzy();
-					getDizzy();
-
-				</textarea>
-    <p>Drag to your bookmarks bar:</p>
-    <a id="bookmarklet-link" class="button" href="#">TouchFuzzy</a>
-
-    <details hidden>
+    <details hidden aria-hidden="true">
       <summary>But... I can't. I'm on a phone.</summary>
       Try
       <a
         href="https://www.cultofmac.com/500532/how-to-add-bookmarklet-mobile-iphone-safari/"
         >this</a
       >.
-      <textarea readonly name="bookmarklet-text" id="bookmarklet-text">
-      </textarea>
+      <textarea
+        readonly
+        name="bookmarklet-text"
+        id="bookmarklet-text"
+      ></textarea>
     </details>
-				
-    <script>
+
+    <script id="bookmarklet-js">
+      function getDizzy() {
+        var things = document.querySelectorAll("*");
+        for (var thing of things) {
+          var time = 5 + Math.floor(Math.random() * Math.floor(30));
+          thing.style.setProperty("--animation-delay", time * 1.5 + "s");
+          thing.style.setProperty("--animation-warp", time * 2.5 + "s");
+
+          var deg = Math.random();
+          thing.style.setProperty("--degree-warp", deg + deg * 0.5 + "deg");
+        }
+      }
+    </script>
+
+    <script id="page-js">
       function cleanCode(code) {
         return code.trim().replace(/(\r\n|\n|\r|\t)/gm, "");
       }
 
       function generateBookmarklet() {
-        var css = document
-          .getElementById("csscode")
-          .value;
-
         var cssInJS =
           "function touchFuzzy() { var style = document.createElement('style'); style.innerHTML = '" +
-          cleanCode(css) +
+          cleanCode(document.getElementById("bookmarklet-css").innerText) +
           "'; document.head.appendChild(style); }";
 
         var js =
           cssInJS +
-          document
-            .getElementById("jscode")
-            .value;
+          document.getElementById("bookmarklet-js").innerText +
+          "touchFuzzy(); getDizzy();";
 
         var output =
           "javascript:" +
@@ -256,23 +270,7 @@ em {
       }
 
       generateBookmarklet();
-    </script>
-    
-    <script>
-    
-    			function getDizzy() {
-						var things = document.querySelectorAll("*");
-						for (var thing of things) {
-							var time = 5 + Math.floor(Math.random() * Math.floor(30));
-							thing.style.setProperty("--animation-delay", time * 1.5 + "s");
-							thing.style.setProperty("--animation-warp", time * 2.5 + "s");
-							thing.style.setProperty("--degree-warp", time * 0.1 + "deg");
-						}
-					}
-					
-					
-					getDizzy();
-
+      getDizzy();
     </script>
   </body>
 </html>

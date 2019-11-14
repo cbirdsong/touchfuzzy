@@ -2,6 +2,7 @@
   --animation-delay: 10s;
   --animation-duration: 30s;
   --animation-warp: 8s;
+  --degree-warp: 0deg;
 }
 * {
   animation-duration: var(--animation-duration),
