@@ -1,0 +1,97 @@
+<!doctype html >
+<html>
+    <head>
+      <title>Touch Fuzzy</title>
+      
+      <style>
+      *, *::before, *::after {
+	      box-sizing: border-box;
+      }
+      
+			html {
+				min-height: 90vh;
+			
+      	font-size: calc(1rem + 1vw);
+      	font-family: sans-serif;
+      }
+      body {
+	      display: flex;
+	      flex-flow: column;
+	      align-items: center;
+	      justify-content: center;
+	      
+				min-height: 90vh;
+				margin: 0;
+	      padding: calc(1rem + 1vw);
+      }
+      
+      a {
+      	color: green;
+      }
+      a.button {
+      	display: inline-block;
+      	padding: 0.3em 0.6em;
+      	
+	      color: white;
+	      background-color: darkgreen;
+	      text-decoration: none;
+      }
+      </style>
+    </head>
+    <body>
+
+				<textarea rows="10" cols="50" name="csscode" id="csscode">
+
+				</textarea>
+
+				<textarea rows="10" cols="50" name="jscode" id="jscode">
+
+					function touchFuzzy(styles) {
+						alert('hi');
+					}
+					
+					function getDizzy() {
+					  var things = document.querySelectorAll("*");
+					  for (var thing of things) {
+					    var time = 5 + Math.floor(Math.random() * Math.floor(30));
+					    thing.style.setProperty("--animation-delay", time * 1.5 + "s");
+					    thing.style.setProperty("--animation-warp", time * 2.5 + "s");
+					    thing.style.setProperty("--degree-warp", time * 0.1 + "deg");
+					  }
+					}
+					
+					styles = "::root { color: blue }";
+					
+					touchFuzzy(styles);
+					getDizzy();
+
+				</textarea>
+        <a id="bookmarklet" class="button" href="#">TouchFuzzy</a>
+
+
+        <script src="https://cdn.jsdelivr.net/gh/cferdinandi/atomic@4/dist/atomic.polyfills.min.js"></script>
+        <script>
+	        atomic('https://some-url.com')
+						.then(function (response) {
+							console.log(response.data); // xhr.responseText
+							console.log(response.xhr);  // full response
+						})
+						.catch(function (error) {
+							console.log(error.status); // xhr.status
+							console.log(error.statusText); // xhr.statusText
+						});
+	        
+          function cleanCode(code){
+             return code.trim()
+           }
+     
+           function generateBookmarklet (){
+             var code  = document.getElementById("code").value;
+             var link  = document.getElementById("bookmarklet");
+             var output = "javascript:" +  encodeURIComponent("(function(){" + cleanCode(code) +  "})();");
+             
+             link.href = output;
+           }
+     </script>
+    </body>
+</html>
