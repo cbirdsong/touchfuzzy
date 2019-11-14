@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Touch Fuzzy</title>
 
+		<link rel="stylesheet" type="text/css" href="touchfuzzy.css" />
     <style>
       *,
       *::before,
@@ -31,16 +32,24 @@
         margin: 0;
         padding: calc(1rem + 1vw);
       }
+      
+      p, ol, ul {
+      	margin-bottom: 1.25em;
+      }
+      li {
+	      margin-top: 0.5em;
+	      margin-bottom: 0.5em;
+      }
 
       a {
-        color: green;
+        color: mediumblue;
       }
       a.button {
         display: inline-block;
-        padding: 0.3em 0.6em;
+        padding: 0.25em 0.75em;
 
-        color: white;
-        background-color: darkgreen;
+        color: black;
+        background-color: lightskyblue;
         border-radius: 4px;
 
         text-decoration: none;
@@ -183,32 +192,40 @@ em {
 					getDizzy();
 
 				</textarea>
-    <p>Drag to your bookmarks bar:</p>
-    <a id="bookmarklet" class="button" href="#">TouchFuzzy</a>
+				<h1>Touch Fuzzy</h1>
+				<ol>
+			    <li>
+			    Drag this to your bookmarks bar:
+			    <a id="bookmarklet" class="button" href="#">🌀</a>
+			    </li>
+			    <li>
+				    Go to a website with a bunch of stuff on it.
+			    </li>
+			    <li>
+			    	Click the 🌀.
+		    	</li>
+	    	</ol>
 
     <script>
       function cleanCode(code) {
-        return code.trim();
+        return code.trim().replace(/(\r\n|\n|\r|\t)/gm, "");
       }
 
       function generateBookmarklet() {
         var css = document
           .getElementById("csscode")
-          .value.replace(/(\r\n|\n|\r|\t)/gm, "");
-        console.log(css);
+          .value;
 
         var cssInJS =
           "function touchFuzzy() { var style = document.createElement('style'); style.innerHTML = '" +
           cleanCode(css) +
           "'; document.head.appendChild(style); }";
-        console.log(cssInJS);
 
         var js =
           cssInJS +
           document
             .getElementById("jscode")
-            .value.replace(/(\r\n|\n|\r|\t)/gm, "");
-        console.log(js);
+            .value;
 
         var link = document.getElementById("bookmarklet");
         var output =
@@ -219,6 +236,23 @@ em {
       }
 
       generateBookmarklet();
+    </script>
+    
+    <script>
+    
+    			function getDizzy() {
+						var things = document.querySelectorAll("*");
+						for (var thing of things) {
+							var time = 5 + Math.floor(Math.random() * Math.floor(30));
+							thing.style.setProperty("--animation-delay", time * 1.5 + "s");
+							thing.style.setProperty("--animation-warp", time * 2.5 + "s");
+							thing.style.setProperty("--degree-warp", time * 0.1 + "deg");
+						}
+					}
+					
+					
+					getDizzy();
+
     </script>
   </body>
 </html>
