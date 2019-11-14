@@ -184,7 +184,18 @@ em {
 
 				</textarea>
     <p>Drag to your bookmarks bar:</p>
-    <a id="bookmarklet" class="button" href="#">TouchFuzzy</a>
+    <a id="bookmarklet-link" class="button" href="#">TouchFuzzy</a>
+
+    <details hidden>
+      <summary>But... I can't. I'm on a phone.</summary>
+      Try
+      <a
+        href="https://www.cultofmac.com/500532/how-to-add-bookmarklet-mobile-iphone-safari/"
+        >this</a
+      >.
+      <textarea readonly name="bookmarklet-text" id="bookmarklet-text">
+      </textarea>
+    </details>
 
     <script>
       function cleanCode(code) {
@@ -210,12 +221,15 @@ em {
             .value.replace(/(\r\n|\n|\r|\t)/gm, "");
         console.log(js);
 
-        var link = document.getElementById("bookmarklet");
         var output =
           "javascript:" +
           encodeURIComponent("(function(){" + cleanCode(js) + "})();");
 
+        var link = document.getElementById("bookmarklet-link");
         link.href = output;
+
+        var textarea = document.getElementById("bookmarklet-text");
+        textarea.value = output;
       }
 
       generateBookmarklet();
