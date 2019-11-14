@@ -57,6 +57,23 @@
     </style>
   </head>
   <body>
+				<h1>touchfuzzy</h1>
+				<ol>
+			    <li>
+			    Drag this to your bookmarks bar:
+			    <a id="bookmarklet" class="button" href="#">🌀</a>
+			    </li>
+			    <li>
+				    Go to a website with a bunch of stuff on it.
+			    </li>
+			    <li>
+			    	Click the 🌀.
+		    	</li>
+			    <li>
+						Wait.
+		    	</li>
+	    	</ol>
+
     <textarea hidden readonly aria-hidden="true" name="csscode" id="csscode">
 			:root {
   --animation-delay: 10s;
@@ -192,23 +209,7 @@ em {
 					getDizzy();
 
 				</textarea>
-				<h1>Touch Fuzzy</h1>
-				<ol>
-			    <li>
-			    Drag this to your bookmarks bar:
-			    <a id="bookmarklet" class="button" href="#">🌀</a>
-			    </li>
-			    <li>
-				    Go to a website with a bunch of stuff on it.
-			    </li>
-			    <li>
-			    	Click the 🌀.
-		    	</li>
-			    <li>
-						Wait.
-		    	</li>
-	    	</ol>
-
+				
     <script>
       function cleanCode(code) {
         return code.trim().replace(/(\r\n|\n|\r|\t)/gm, "");
