@@ -33,6 +33,17 @@
 
         background-color: #fdf4e8;
       }
+      main {
+        flex: 1;
+
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+      }
+      footer {
+        font-size: 0.75em;
+      }
 
       h1,
       h2,
@@ -55,6 +66,10 @@
 
       a {
         color: mediumblue;
+        text-decoration: underline;
+
+        text-decoration-style: dotted;
+        text-decoration-thickness: 0.1em;
 
         transition-property: color, opacity, background-color, transform, filter,
           box-shadow;
@@ -197,36 +212,43 @@
     </style>
   </head>
   <body>
-    <h1>touchfuzzy</h1>
-    <ol>
-      <li>
-        Drag this to your bookmarks bar:
-        <a id="bookmarklet-link" class="button" href="#">🌀</a>
-      </li>
-      <li>
-        Go to a website with a bunch of stuff on it.
-      </li>
-      <li>
-        Click the 🌀.
-      </li>
-      <li>
-        Wait.
-      </li>
-    </ol>
+    <main>
+      <h1>touchfuzzy</h1>
+      <ol>
+        <li>
+          Drag this to your bookmarks bar:
+          <a id="bookmarklet-link" class="button" href="#">🌀</a>
+        </li>
+        <li>
+          Go to a website with a bunch of stuff on it.
+        </li>
+        <li>
+          Click the 🌀.
+        </li>
+        <li>
+          Wait.
+        </li>
+      </ol>
 
-    <details hidden aria-hidden="true">
-      <summary>But... I can't. I'm on a phone.</summary>
-      Try
-      <a
-        href="https://www.cultofmac.com/500532/how-to-add-bookmarklet-mobile-iphone-safari/"
-        >this</a
-      >.
-      <textarea
-        readonly
-        name="bookmarklet-text"
-        id="bookmarklet-text"
-      ></textarea>
-    </details>
+      <details hidden aria-hidden="true">
+        <summary>But... I can't. I'm on a phone.</summary>
+        Try
+        <a
+          href="https://www.cultofmac.com/500532/how-to-add-bookmarklet-mobile-iphone-safari/"
+          >this</a
+        >.
+        <textarea
+          readonly
+          name="bookmarklet-text"
+          id="bookmarklet-text"
+        ></textarea>
+      </details>
+    </main>
+    <footer>
+      <a href="https://github.com/cbirdsong/touchfuzzy" target="_blank"
+        >source</a
+      >
+    </footer>
 
     <script id="bookmarklet-js">
       function getDizzy() {
