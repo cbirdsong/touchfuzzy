@@ -17,18 +17,28 @@ body {
   animation-delay: 60s;
 }
 
+figure,
 img,
 picture,
 video,
 iframe,
 svg,
+canvas,
 input,
 textarea,
-button {
+button,
+pre,
+hr {
   animation-name: hueRotate, scale3D, origin;
 }
 p,
 li,
+dd,
+dt,
+dl,
+figcaption,
+blockquote,
+cite,
 h1,
 h2,
 h3,
@@ -39,7 +49,7 @@ a,
 strong,
 em {
   --animation-duration: 10s;
-  animation-name: blur;
+  animation-name: blur, skew;
 }
 
 @keyframes hueRotate {
@@ -101,4 +111,3 @@ em {
     filter: blur(0.1em) contrast(200%);
   }
 }
-

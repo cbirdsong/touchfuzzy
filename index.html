@@ -1,97 +1,224 @@
-<!doctype html >
-<html>
-    <head>
-      <title>Touch Fuzzy</title>
-      
-      <style>
-      *, *::before, *::after {
-	      box-sizing: border-box;
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Touch Fuzzy</title>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
       }
-      
-			html {
-				min-height: 90vh;
-			
-      	font-size: calc(1rem + 1vw);
-      	font-family: sans-serif;
+
+      html {
+        min-height: 90vh;
+
+        font-size: calc(1rem + 1vw);
+        line-height: 1.5;
+        font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", "Helvetica", "Arial", sans-serif;
       }
       body {
-	      display: flex;
-	      flex-flow: column;
-	      align-items: center;
-	      justify-content: center;
-	      
-				min-height: 90vh;
-				margin: 0;
-	      padding: calc(1rem + 1vw);
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 90vh;
+        margin: 0;
+        padding: calc(1rem + 1vw);
       }
-      
+
       a {
-      	color: green;
+        color: green;
       }
       a.button {
-      	display: inline-block;
-      	padding: 0.3em 0.6em;
-      	
-	      color: white;
-	      background-color: darkgreen;
-	      text-decoration: none;
+        display: inline-block;
+        padding: 0.3em 0.6em;
+
+        color: white;
+        background-color: darkgreen;
+        border-radius: 4px;
+
+        text-decoration: none;
       }
-      </style>
-    </head>
-    <body>
+    </style>
+  </head>
+  <body>
+    <textarea hidden readonly aria-hidden="true" name="csscode" id="csscode">
+			:root {
+  --animation-delay: 10s;
+  --animation-duration: 30s;
+  --animation-warp: 8s;
+}
+* {
+  animation-duration: var(--animation-duration),
+    calc(var(--animation-duration) + var(--animation-warp)),
+    calc(var(--animation-duration) + var(--animation-warp) * 2);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: var(--animation-delay);
+}
 
-				<textarea rows="10" cols="50" name="csscode" id="csscode">
+body {
+  animation-name: skew;
+  animation-delay: 60s;
+}
 
-				</textarea>
+figure,
+img,
+picture,
+video,
+iframe,
+svg,
+canvas,
+input,
+textarea,
+button,
+pre,
+hr {
+  animation-name: hueRotate, scale3D, origin;
+}
+p,
+li,
+dd,
+dt,
+dl,
+figcaption,
+blockquote,
+cite,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+strong,
+em {
+  --animation-duration: 10s;
+  animation-name: blur, skew;
+}
 
-				<textarea rows="10" cols="50" name="jscode" id="jscode">
+@keyframes hueRotate {
+  from {
+    filter: hue-rotate(0deg) saturate(100%);
+  }
+  to {
+    filter: hue-rotate(180deg) saturate(120%);
+  }
+}
+@keyframes scale3D {
+  from {
+    transform: scale3D(0.95, 0.95, 1) skew(-1deg, -1deg);
+  }
+  to {
+    transform: scale3D(1.25, 1.25, 1) skew(1deg, 1deg);
+  }
+}
+@keyframes skew {
+  0% {
+    transform: skew(0deg, 0deg);
+  }
+  33% {
+    transform: skew(0.5deg, 0.5deg);
+  }
+  66% {
+    transform: skew(-0.5deg, -0.5deg);
+  }
+  100% {
+    transform: skew(0deg, 0deg);
+  }
+}
+@keyframes origin {
+  0% {
+    transform-origin: 50% 50%;
+  }
+  20% {
+    transform-origin: 40% 50%;
+  }
+  40% {
+    transform-origin: 60% 40%;
+  }
+  60% {
+    transform-origin: 40% 60%;
+  }
+  80% {
+    transform-origin: 50% 40%;
+  }
+  100% {
+    transform-origin: 50% 50%;
+  }
+}
 
-					function touchFuzzy(styles) {
-						alert('hi');
-					}
+@keyframes blur {
+  from {
+    filter: blur(0em) contrast(100%);
+  }
+  to {
+    filter: blur(0.1em) contrast(200%);
+  }
+}
+
+		</textarea
+    >
+
+    <textarea hidden readonly aria-hidden="true" name="jscode" id="jscode">
 					
 					function getDizzy() {
-					  var things = document.querySelectorAll("*");
-					  for (var thing of things) {
-					    var time = 5 + Math.floor(Math.random() * Math.floor(30));
-					    thing.style.setProperty("--animation-delay", time * 1.5 + "s");
-					    thing.style.setProperty("--animation-warp", time * 2.5 + "s");
-					    thing.style.setProperty("--degree-warp", time * 0.1 + "deg");
-					  }
+						var things = document.querySelectorAll("*");
+						for (var thing of things) {
+							var time = 5 + Math.floor(Math.random() * Math.floor(30));
+							thing.style.setProperty("--animation-delay", time * 1.5 + "s");
+							thing.style.setProperty("--animation-warp", time * 2.5 + "s");
+							thing.style.setProperty("--degree-warp", time * 0.1 + "deg");
+						}
 					}
 					
-					styles = "::root { color: blue }";
 					
-					touchFuzzy(styles);
+					touchFuzzy();
 					getDizzy();
 
 				</textarea>
-        <a id="bookmarklet" class="button" href="#">TouchFuzzy</a>
+    <p>Drag to your bookmarks bar:</p>
+    <a id="bookmarklet" class="button" href="#">TouchFuzzy</a>
 
+    <script>
+      function cleanCode(code) {
+        return code.trim();
+      }
 
-        <script src="https://cdn.jsdelivr.net/gh/cferdinandi/atomic@4/dist/atomic.polyfills.min.js"></script>
-        <script>
-	        atomic('https://some-url.com')
-						.then(function (response) {
-							console.log(response.data); // xhr.responseText
-							console.log(response.xhr);  // full response
-						})
-						.catch(function (error) {
-							console.log(error.status); // xhr.status
-							console.log(error.statusText); // xhr.statusText
-						});
-	        
-          function cleanCode(code){
-             return code.trim()
-           }
-     
-           function generateBookmarklet (){
-             var code  = document.getElementById("code").value;
-             var link  = document.getElementById("bookmarklet");
-             var output = "javascript:" +  encodeURIComponent("(function(){" + cleanCode(code) +  "})();");
-             
-             link.href = output;
-           }
-     </script>
-    </body>
+      function generateBookmarklet() {
+        var css = document
+          .getElementById("csscode")
+          .value.replace(/(\r\n|\n|\r|\t)/gm, "");
+        console.log(css);
+
+        var cssInJS =
+          "function touchFuzzy() { var style = document.createElement('style'); style.innerHTML = '" +
+          cleanCode(css) +
+          "'; document.head.appendChild(style); }";
+        console.log(cssInJS);
+
+        var js =
+          cssInJS +
+          document
+            .getElementById("jscode")
+            .value.replace(/(\r\n|\n|\r|\t)/gm, "");
+        console.log(js);
+
+        var link = document.getElementById("bookmarklet");
+        var output =
+          "javascript:" +
+          encodeURIComponent("(function(){" + cleanCode(js) + "})();");
+
+        link.href = output;
+      }
+
+      generateBookmarklet();
+    </script>
+  </body>
 </html>
