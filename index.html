@@ -180,6 +180,19 @@
         --animation-duration: 5s;
         animation-name: blur, skew;
       }
+      
+      
+      @media (prefers-reduced-motion: reduce) {
+        *, ::before, ::after {
+          animation-delay: -1ms !important;
+          animation-duration: 1ms !important;
+          animation-iteration-count: 1 !important;
+          background-attachment: initial !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0s !important;
+          transition-delay: 0s !important;
+        }
+      }
 
       @keyframes hueRotate {
         from {
@@ -246,6 +259,7 @@
     <main>
       <article>
         <h1>touchfuzzy</h1>
+        <h2>How to use:</h2>
         <ol>
           <li>
             Drag this to your bookmarks bar:
@@ -282,13 +296,22 @@
       </details>
     </main>
     <footer>
-      <a href="https://github.com/cbirdsong/touchfuzzy" target="_blank"
-        >source</a
+      <a href="https://github.com/cbirdsong/touchfuzzy"
+        >view source</a
       >
     </footer>
 
     <script id="bookmarklet-js">
       function getDizzy() {
+        // Grab the prefers reduced media query.
+        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        // Check if the media query matches or is not available.
+        if (!mediaQuery || mediaQuery.matches) {
+          alert("Your browser and/or operating system has reported you'd prefer to reduce the amount of motion you experience, and an excessive amount of that is the joke of this bookmarklet. Disable it if you want to give it a try!");
+          return false;
+        } 
+        
         var things = document.querySelectorAll("*");
         for (var thing of things) {
           var time = 5 + Math.floor(Math.random() * Math.floor(30));
