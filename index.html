@@ -158,7 +158,7 @@
       button,
       pre,
       hr,
-      details, 
+      details,
       summary {
         animation-name: hueRotate, scale3D, origin;
       }
@@ -182,10 +182,11 @@
         --animation-duration: 5s;
         animation-name: blur, skew;
       }
-      
-      
+
       @media (prefers-reduced-motion: reduce) {
-        *, ::before, ::after {
+        *,
+        ::before,
+        ::after {
           animation-delay: -1ms !important;
           animation-duration: 1ms !important;
           animation-iteration-count: 1 !important;
@@ -298,22 +299,22 @@
       </details>
     </main>
     <footer>
-      <a href="https://github.com/cbirdsong/touchfuzzy"
-        >view source</a
-      >
+      <a href="https://github.com/cbirdsong/touchfuzzy">view source</a>
     </footer>
 
     <script id="bookmarklet-js">
       function getDizzy() {
-        // Grab the prefers reduced media query.
-        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const mediaQuery = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        );
 
-        // Check if the media query matches or is not available.
         if (!mediaQuery || mediaQuery.matches) {
-          alert("Your browser and/or operating system has reported you'd prefer to reduce the amount of motion you experience, and an excessive amount of that is the joke of this bookmarklet. Disable it if you want to give it a try!");
+          window.alert(
+            "Your browser and/or operating system has reported you'd prefer to reduce the amount of motion you experience, and an excessive amount of that is the joke of this bookmarklet. Disable it if you want to give it a try!"
+          );
           return false;
-        } 
-        
+        }
+
         var things = document.querySelectorAll("*");
         for (var thing of things) {
           var time = 5 + Math.floor(Math.random() * Math.floor(30));
