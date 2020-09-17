@@ -304,21 +304,29 @@
 
     <script id="bookmarklet-js">
       function getDizzy() {
-        const mediaQuery = window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        );
+        if (
+          "matchMedia" in window &&
+          "CSS" in window &&
+          CSS.supports("animation", "var(--primary)")
+        ) {
+          var reducedMotionMediaQuery = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          );
+        } else {
+          return false;
+        }
 
-        if (!mediaQuery || mediaQuery.matches) {
+        if (reducedMotionMediaQuery || reducedMotionMediaQuery.matches) {
           if (
             window.confirm(
               "Your browser and/or operating system has reduced motion enabled, and an excessive amount of motion is the joke of this bookmarklet. Would you like to continue?"
             )
           ) {
           } else {
-            var styleReducedMotion = document.createElement("style");
-            styleReducedMotion.innerHTML =
+            var styleForceReducedMotion = document.createElement("style");
+            styleForceReducedMotion.innerHTML =
               "@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation-delay: -1ms !important; animation-duration: 1ms !important; animation-iteration-count: 1 !important; background-attachment: initial !important; scroll-behavior: auto !important; transition-duration: 0s !important; transition-delay: 0s !important; } }";
-            document.head.appendChild(styleReducedMotion);
+            document.head.appendChild(styleForceReducedMotion);
           }
         }
 
