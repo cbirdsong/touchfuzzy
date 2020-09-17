@@ -124,6 +124,20 @@
       select {
         font: inherit;
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        ::before,
+        ::after {
+          animation-delay: -1ms !important;
+          animation-duration: 1ms !important;
+          animation-iteration-count: 1 !important;
+          background-attachment: initial !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0s !important;
+          transition-delay: 0s !important;
+        }
+      }
     </style>
     <style id="bookmarklet-css">
       :root {
@@ -181,20 +195,6 @@
       em {
         --animation-duration: 5s;
         animation-name: blur, skew;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        ::before,
-        ::after {
-          animation-delay: -1ms !important;
-          animation-duration: 1ms !important;
-          animation-iteration-count: 1 !important;
-          background-attachment: initial !important;
-          scroll-behavior: auto !important;
-          transition-duration: 0s !important;
-          transition-delay: 0s !important;
-        }
       }
 
       @keyframes hueRotate {
@@ -309,10 +309,17 @@
         );
 
         if (!mediaQuery || mediaQuery.matches) {
-          window.alert(
-            "Your browser and/or operating system has reported you'd prefer to reduce the amount of motion you experience, and an excessive amount of that is the joke of this bookmarklet. Disable it if you want to give it a try!"
-          );
-          return false;
+          if (
+            window.confirm(
+              "Your browser and/or operating system has reduced motion enabled, and an excessive amount of motion is the joke of this bookmarklet. Would you like to continue?"
+            )
+          ) {
+          } else {
+            var styleReducedMotion = document.createElement("style");
+            styleReducedMotion.innerHTML =
+              "@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation-delay: -1ms !important; animation-duration: 1ms !important; animation-iteration-count: 1 !important; background-attachment: initial !important; scroll-behavior: auto !important; transition-duration: 0s !important; transition-delay: 0s !important; } }";
+            document.head.appendChild(styleReducedMotion);
+          }
         }
 
         var things = document.querySelectorAll("*");
