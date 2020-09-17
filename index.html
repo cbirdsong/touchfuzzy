@@ -316,7 +316,7 @@
           return false;
         }
 
-        if (reducedMotionMediaQuery || reducedMotionMediaQuery.matches) {
+        if (reducedMotionMediaQuery && reducedMotionMediaQuery.matches) {
           if (
             window.confirm(
               "Your browser and/or operating system has reduced motion enabled, and an excessive amount of motion is the joke of this bookmarklet. Would you like to continue?"
