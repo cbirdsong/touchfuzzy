@@ -20,6 +20,7 @@ body {
 
 figure,
 img,
+svg,
 picture,
 video,
 iframe,
@@ -46,6 +47,9 @@ h3,
 h4,
 h5,
 h6,
+details,
+summary,
+time,
 a,
 strong,
 em {
